@@ -12,9 +12,10 @@ CFLAGS += -I$(INCLUDEDIR)
 
 all: run
 
-SRCS += $(patsubst %, $(SRCDIR)/%.c, main buffer)
-OBJS += $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-DEPS += $(patsubst $(DEPDIR)/%.c, $(DEPDIR)/%.d, $(DEPS))
+SRCNAMES += main buffer
+
+OBJS += $(patsubst %, $(OBJDIR)/%.o, $(SRCNAMES))
+DEPS += $(patsubst %, $(DEPDIR)/%.d, $(SRCNAMES))
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR) $(DEPDIR)
