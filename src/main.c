@@ -4,25 +4,35 @@
 
 #include "buffer.h"
 
+#undef  TEMPLATE_TYPE
 #define TEMPLATE_TYPE int
+#undef  TEMPLATE_SIZE
 #define TEMPLATE_SIZE 128
 #include "buffer.template.h"
+typedef COMPLETE_NAME(t) tbuffer_i128_t;
+#define tbuffer_i128_get_size _COMPLETE_NAME(int,128,get_size)
 
-#define _STR(X) #X
-#define STR(X) _STR(X)
+#undef  TEMPLATE_TYPE
+#define TEMPLATE_TYPE char
+#undef  TEMPLATE_SIZE
+#define TEMPLATE_SIZE 12
+#include "buffer.template.h"
+typedef COMPLETE_NAME(t) tbuffer_c12_t;
+#define tbuffer_c12_get_size _COMPLETE_NAME(char,12,get_size)
 
 int main (int argc, char **argv)
 {
 	printf("Hello\n");
 
 	buffer_t b;
-	COMPLETE_NAME(t) cb;
-	printf("Name is %s\n", STR(COMPLETE_NAME(t)));
+	tbuffer_c12_t cb12;
+	tbuffer_i128_t ib128;
 
 	printf("Buffersize is %d\n", buffer_get_size(&b));
-	printf("Buffer_Int128 size name is %s\n", STR(COMPLETE_NAME(get_size)));
-	printf("Buffer_Int128 size is %d\n", template_buffer_int128_get_size(&cb));
-	printf("Buffer_Int128 size name is %s\n", STR(template_buffer_int128_get_size(&cb)));
+	printf("Size for cb12 is %d\n", template_buffer_char12_get_size(&cb12));
+	printf("Size for ib128 is %d\n", template_buffer_int128_get_size(&ib128));
+	printf("Size for cb12 is %d\n", tbuffer_c12_get_size(&cb12));
+	printf("Size for ib128 is %d\n", tbuffer_i128_get_size(&ib128));
 
 	printf("Goodbye\n");
 	return EXIT_SUCCESS;
