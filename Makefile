@@ -1,13 +1,18 @@
 
 APP = terrible
 
+INCLUDEDIR := hdr
+
 SRCDIR := src
 DEPDIR := .dep
 OBJDIR := .obj
 
+CFLAGS += --std=c11 -Wall -pedantic
+CFLAGS += -I$(INCLUDEDIR)
+
 all: run
 
-SRCS += $(patsubst %, $(SRCDIR)/%.c, main)
+SRCS += $(patsubst %, $(SRCDIR)/%.c, main buffer)
 OBJS += $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS += $(patsubst $(DEPDIR)/%.c, $(DEPDIR)/%.d, $(DEPS))
 
