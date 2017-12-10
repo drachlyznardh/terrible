@@ -1,2 +1,8 @@
+
 Is it possible to emulate template in C by complex MACRO espansion and repeated
 inclusions? Is it ethical?
+
+Well, it works. It requires some busywork and it's not elegant but it works.
+Next up, I want to try and generate code from a .c.in file with some sed
+substitution and tweak the Makefile to properly automate the code generation
+
